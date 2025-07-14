@@ -6,7 +6,12 @@ def update_apt_cache():
 def install_nginx():
     return ansible_runner.run(host_pattern='localhost', module='apt', module_args='name=nginx state=present')
 
+def enable_nginx():
+    return ansible_runner.run(host_pattern='localhost', module='service', module_args='name=nginx state=started enabled=True')
 
+# ----------------------------------
+# --- running tasks sequentially ---
+# ----------------------------------
 def _tasks(*tasks):
     for task in tasks:
         r = task()
@@ -15,5 +20,6 @@ def _tasks(*tasks):
 
 _tasks(
     update_apt_cache,
-    install_nginx
+    install_nginx,
+    enable_nginx
 )
