@@ -1,5 +1,7 @@
 import ansible_runner
 
+PG_VERSION = 16
+
 def update_apt_cache():
     return ansible_runner.run(host_pattern='localhost', module='apt', module_args='update-cache=True')
 
@@ -8,6 +10,9 @@ def install_nginx():
 
 def enable_nginx():
     return ansible_runner.run(host_pattern='localhost', module='service', module_args='name=nginx state=started enabled=True')
+
+def install_postgresql():
+    return ansible_runner.run(host_pattern='localhost', module='apt', module_args=f"name=postgresql,postgresql-contrib state=present")
 
 # ----------------------------------
 # --- running tasks sequentially ---
