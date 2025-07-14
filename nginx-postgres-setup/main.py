@@ -1,7 +1,5 @@
 import ansible_runner
 
-PG_VERSION = 16
-
 def update_apt_cache():
     return ansible_runner.run(host_pattern='localhost', module='apt', module_args='update-cache=True')
 
@@ -26,5 +24,6 @@ def _tasks(*tasks):
 _tasks(
     update_apt_cache,
     install_nginx,
-    enable_nginx
+    enable_nginx,
+    install_postgresql
 )
