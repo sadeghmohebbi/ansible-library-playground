@@ -12,6 +12,9 @@ def enable_nginx():
 def install_postgresql():
     return ansible_runner.run(host_pattern='localhost', module='apt', module_args=f"name=postgresql,postgresql-contrib state=present")
 
+def enable_postgresql():
+    return ansible_runner.run(host_pattern='localhost', module='service', module_args='name=postgresql@14-main.service state=started enabled=True')
+
 # ----------------------------------
 # --- running tasks sequentially ---
 # ----------------------------------
@@ -25,5 +28,6 @@ _tasks(
     update_apt_cache,
     install_nginx,
     enable_nginx,
-    install_postgresql
+    install_postgresql,
+    enable_postgresql
 )
