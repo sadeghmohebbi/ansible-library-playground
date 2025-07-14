@@ -4,6 +4,10 @@ install and start nginx and postgres using ansible-runner package
 ## Requirements
 
 you should have root access and ensure you have installed these items to your host environment:
+
+```bash
+apt install python3 python3-pip
+```
 - python3
 - pip
 
